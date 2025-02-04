@@ -1,13 +1,13 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import carrito from '../../assets/image/carrito.JPG';
 import logo from '../../assets/image/logo.JPG';
+import { CartContext } from '../../context/cartContext';
 import './Navbar.css';
 
 const Navbar = () => {
 
-  const handleClick=()=>{
-    console.log('ir Al carrito') 
-  }
+const { cantidadEnCarrito,  }=useContext(CartContext)
 
   return (
     <nav className='navbar'>
@@ -20,13 +20,14 @@ const Navbar = () => {
 
         
           <div className='container-cart-img'>
-            <Link to="/carrito">
-              <img className='cart-img' src={carrito} 
-              alt="carrito" onClick={handleClick} />
-            </Link>
-            <span className='cart-count'>2</span>
+              <Link to="/carrito">
+                <img className='cart-img' src={carrito} 
+                alt="carrito" />
+              </Link>
+              
+            <span className='cart-count'>{cantidadEnCarrito()}</span>
           </div>
-      
+        
     </nav>
   );
 };
