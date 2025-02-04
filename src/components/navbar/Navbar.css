@@ -1,0 +1,99 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--navfot);
+  color: white;
+  font-size: 20px;
+  transition: all ease 3s;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.logo-container img,
+.cart-img {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #FFD700;
+  cursor: pointer;
+  transition: all ease 2s;
+}
+
+.logo-container:hover img,
+.cart-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5);
+}
+
+.logo-container:active img,
+.cart-img:active {
+  transform: scale(0.9);
+  box-shadow: 0px 0px 5px rgba(255, 215, 0, 0.7);
+}
+
+.container-cart-img {
+  position: relative;
+  /* Para posicionar el span correctamente */
+}
+
+.cart-count {
+  position: absolute;
+  /* Posicionamiento absoluto respecto al contenedor */
+  top: -10px;
+  /* Ajusta la posición vertical */
+  right: -10px;
+  /* Ajusta la posición horizontal */
+  background-color: red;
+  /* Color de fondo */
+  color: white;
+  /* Color del texto */
+  border-radius: 50%;
+  /* Forma circular */
+  padding: 5px 10px;
+  /* Espaciado interno */
+  font-size: 14px;
+  /* Tamaño de la fuente */
+  font-weight: bold;
+  /* Texto en negrita */
+}
+
+@media screen and (max-width: 450px) {
+
+  .logo-container img,
+  .cart-img {
+    width: 75px;
+    height: 75px;
+    transition: all ease 2s;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .navbar h2 {
+    display: none;
+  }
+
+  .container-cart-img {
+    display: flex;
+  }
+
+  .cart-button {
+    margin-top: 1rem;
+  }
+}

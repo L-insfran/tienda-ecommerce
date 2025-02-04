@@ -1,0 +1,27 @@
+[
+  {
+    "id":1,
+    "zona":"zona1",
+    "costo":1000
+  },
+  {
+    "id":2,
+    "zona":"zona2",
+    "costo":1000
+  },
+  {
+    "id":3,
+    "zona":"zona3",
+    "costo":1000
+  },
+  {
+    "id":3,
+    "zona":"zona3",
+    "costo":1000
+  },
+  {
+    "id":3,
+    "zona":"zona3",
+    "costo":1000
+  }
+]

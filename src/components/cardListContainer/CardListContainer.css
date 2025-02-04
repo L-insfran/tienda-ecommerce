@@ -1,0 +1,41 @@
+.container {
+  background-color: var(--secon);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 columnas por fila */
+  gap: 16px;
+  max-width: 1200px;
+  /* Ajusta según el diseño */
+  width: 100%;
+}
+.H2 {
+    font-size: 3rem;
+    text-align-last: center;
+    background-color: var(--secon);
+    padding: 1rem;
+    color:white
+}
+
+
+
+@media screen and (max-width: 1150px) {
+  .container-section {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columnas por fila en pantallas medianas */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container-section {
+    grid-template-columns: 1fr;
+    justify-items: anchor-center;
+    /* 1 columna en pantallas pequeñas */
+  }
+}
+

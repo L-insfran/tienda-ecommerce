@@ -1,0 +1,70 @@
+
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  
+  /* Distribuye los elementos uniformemente */
+  font-size: 20px;
+  background-color: var(--navfot);
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  color: white;
+  gap: 2rem;
+  flex-wrap: wrap;
+  /* Permite que los elementos se ajusten en pantallas pequeñas */
+}
+
+.tecnico {
+  flex: 1;
+  /* Permite que el contenedor del nombre del desarrollador se expanda */
+  text-align: center;
+}
+
+.social-buttons,
+.btn-pc {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+button a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button img {
+  width: 40px;
+  /* Ajusta el tamaño de los iconos */
+  height: 40px;
+  object-fit: contain;
+  /* Asegura que la imagen mantenga su proporción */
+  transition: transform 0.2s ease-in-out;
+}
+
+button img:hover {
+  transform: scale(1.1);
+  /* Pequeño efecto de zoom al pasar el mouse */
+}
+
+.btn-pc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+
