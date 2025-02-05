@@ -4,10 +4,10 @@ import { CartContext } from "../../context/cartContext";
 import './Carrito.css';
 
 const Carrito = () => {
-  const { carrito, valorTotalEnCarrito, aumentarCantidad, disminuirCantidad, vaciarCarrito } = useContext(CartContext);
+  const { carrito, valorTotalEnCarrito, aumentarCantidad, disminuirCantidad, vaciarCarrito, eliminarDelCarrito } = useContext(CartContext);
   const navigate = useNavigate();
 
-    const handleClick = () => {
+  const handleClick = () => {
     navigate(`/confirmar`);
   };
 
@@ -25,9 +25,9 @@ const Carrito = () => {
       {/* Botón para vaciar el carrito */}
       <div className="carrito-actions">
         {carrito.length > 0 &&
-        <button className="clear-button" onClick={vaciarCarrito}>
-          Vaciar Carrito
-        </button>
+          <button className="clear-button" onClick={vaciarCarrito}>
+            Vaciar Carrito
+          </button>
         }
       </div>
 
@@ -35,26 +35,32 @@ const Carrito = () => {
       <div className="carrito-description">
         {carrito.map((prod) => (
           <div key={prod.id} className="product-item">
-            <h4>{prod.detalle}</h4>
-            <h4>Neto: {prod.tipo}</h4>
-            <div className="quantity-controls">
-              <button onClick={() => disminuirCantidad(prod.id)}>-</button>
-              <span>{prod.cantidad}</span>
-              <button onClick={() => aumentarCantidad(prod.id)}>+</button>
+            <div className="product-info">
+              <h4>{prod.detalle}</h4>
+              <h4>Neto: {prod.tipo}</h4>
+              <div className="quantity-controls">
+                <button onClick={() => disminuirCantidad(prod.id)}>-</button>
+                <span>{prod.cantidad}</span>
+                <button onClick={() => aumentarCantidad(prod.id)}>+</button>
+              </div>
+              <span className="product-price">${prod.cantidad * prod.precio}</span>
             </div>
-            <span style={{ color: "red" }}>${prod.cantidad * prod.precio}</span>
+            <button className="delete-button" onClick={() => eliminarDelCarrito(prod.id)}>
+              Eliminar
+            </button>
             <hr />
           </div>
         ))}
       </div>
-       {/* Botón "Realizar pedido" */}
-      {valorTotalEnCarrito()>0 &&
-      <button
-        className="confirmar-pedido-button"
-        onClick={handleClick}
-      >
-        pedido <span className="confirmar-pedido-span">${valorTotalEnCarrito()}</span>
-      </button>
+
+      {/* Botón "Realizar pedido" */}
+      {valorTotalEnCarrito() > 0 &&
+        <button
+          className="confirmar-pedido-button"
+          onClick={handleClick}
+        >
+          pedido <span className="confirmar-pedido-span">${valorTotalEnCarrito()}</span>
+        </button>
       }
     </div>
   );

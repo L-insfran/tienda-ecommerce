@@ -1,7 +1,10 @@
 .card-detail-container {
   background: radial-gradient(black, transparent);
   padding: 25px 0;
+  position: relative;
+  /* Para posicionar el botón flotante */
 }
+
 .card-detail {
   display: flex;
   align-items: center;
@@ -14,7 +17,7 @@
   background: #fff;
   padding: 15px;
   gap: 20px;
-  background-color: var(--alternative)
+  background-color: var(--alternative);
 }
 
 .card-image-detail {
@@ -55,7 +58,6 @@
   margin-top: 10px;
 }
 
-
 .quantity-input-detail {
   width: 40px;
   text-align: center;
@@ -65,6 +67,26 @@
   border-radius: 5px;
 }
 
+/* Estilos para el botón flotante */
+.floating-back-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.floating-back-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
 @media screen and (max-width: 450px) {
   .card-detail {
     flex-direction: column;
@@ -72,5 +94,14 @@
     transition: all ease 2s;
   }
 
+  .floating-back-button {
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
 
+    .card-detail-container{
+      padding: 45px 0;
+    }
 }

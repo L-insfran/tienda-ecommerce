@@ -8,7 +8,7 @@ import './CardListContainer.css';
 const CardListContainer = () => {
   
   const [productos, SetProductos] = useState([])
-  // const [destino, SetDestino] = useState([])
+
 
   useEffect(()=>{
     pedirProductos()
@@ -17,12 +17,7 @@ const CardListContainer = () => {
       })
   },[])
 
-  // useEffect(()=>{
-  //   pedirdDestino()
-  //     .then((resp)=>{
-  //     SetDestino(resp)
-  //     })
-  // },[])
+  
 
   return (
     <div >

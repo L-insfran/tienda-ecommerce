@@ -107,6 +107,20 @@
   transition: background 0.3s ease;
 }
 
+.pago-option.selected {
+  background-color: #007bff;
+  /* Color de fondo cuando está seleccionado */
+  color: white;
+  /* Color del texto cuando está seleccionado */
+  font-weight: bold;
+  /* Texto en negrita */
+  border: 2px solid #0056b3;
+  /* Borde resaltado */
+}
+.pago-option:hover {
+  background-color: #e0e0e0;
+}
+
 .pago-option:hover {
   background-color: #e0e0e0;
 }
@@ -142,6 +156,11 @@
   background-color: #0056b3;
   transform: scale(1.05);
 }
+
+.error-message {
+  color:red
+}
+
 
 @media (max-width: 500px) {
   .pedido-content {

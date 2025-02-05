@@ -23,6 +23,10 @@ export const CartProvider = ({children}) => {
 
     setCarrito(nuevoCarrito);
   };
+  const eliminarDelCarrito = (itemId)=>{
+    const actualizarCarrito = carrito.filter((prod) => prod.id !== itemId)
+    setCarrito(actualizarCarrito)
+  }
   const vaciarCarrito = () => {
     setCarrito([]);
   };
@@ -34,7 +38,7 @@ export const CartProvider = ({children}) => {
   };
   const aumentarCantidad = (itemId) => {
     const actualizarCarrito = [...carrito];
-    const itemactualizado = actualizarCarrito.find((prod) => prod.id == itemId);
+    const itemactualizado = actualizarCarrito.find((prod) => prod.id === itemId);
 
     itemactualizado.stock >itemactualizado.cantidad ?
     itemactualizado.cantidad += 1:'' ;
@@ -64,6 +68,7 @@ export const CartProvider = ({children}) => {
         aumentarCantidad,
         disminuirCantidad,
         vaciarCarrito,
+        eliminarDelCarrito,
       }}
     >
       {children}

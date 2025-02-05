@@ -35,7 +35,6 @@
 
 .carrito-actions .clear-button {
   background-color: #ff4444;
-  /* Rojo */
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -46,7 +45,6 @@
 
 .carrito-actions .clear-button:hover {
   background-color: #cc0000;
-  /* Rojo más oscuro al pasar el mouse */
 }
 
 /* Lista de productos en el carrito */
@@ -59,7 +57,14 @@
 
 /* Estilos para los elementos del carrito */
 .product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
+}
+
+.product-info {
+  flex: 1;
 }
 
 .product-item h4 {
@@ -86,13 +91,30 @@
   background-color: #ddd;
 }
 
+.product-price {
+  color: red;
+  font-weight: bold;
+}
+
+.delete-button {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #cc0000;
+}
+
 .product-item hr {
   border: 0;
   border-top: 1px solid #eee;
   margin: 0.5rem 0;
 }
-
-
 
 /* Estilos para el botón "Realizar pedido" */
 .confirmar-pedido-button {
@@ -114,18 +136,15 @@
 
 .confirmar-pedido-button:hover {
   background-color: var(--alternative);
-  color:#333;
-  /* Verde más oscuro al pasar el mouse */
+  color: #333;
 }
 
 .confirmar-pedido-button:active {
   transform: scale(0.95);
-  /* Efecto de clic */
 }
 
 .confirmar-pedido-button:disabled {
   background-color: #6c757d;
-  /* Gris cuando está deshabilitado */
   cursor: not-allowed;
 }
 
