@@ -1,27 +1,32 @@
 [
   {
     "id":1,
-    "zona":"zona1",
-    "costo":1000
+    "zona":"Joce C Paz, centro y alrededores",
+    "costo":1500
   },
   {
     "id":2,
-    "zona":"zona2",
-    "costo":1000
+    "zona":"San Miguel Centro y alrededores",
+    "costo":1550
   },
   {
     "id":3,
-    "zona":"zona3",
-    "costo":1000
+    "zona":"Muñiz Centro y alrededores",
+    "costo":1550
   },
   {
-    "id":3,
-    "zona":"zona3",
-    "costo":1000
+    "id":4,
+    "zona":"Santa Brigida / Santa Maria",
+    "costo":1600
   },
   {
-    "id":3,
-    "zona":"zona3",
-    "costo":1000
+    "id":5,
+    "zona":"Moreno Centro y alrededores",
+    "costo":2300
+  },
+  {
+    "id":6,
+    "zona":"Polvorines Centro y alrededores",
+    "costo":2600
   }
 ]

@@ -98,11 +98,11 @@
 .confirmar-pedido-button {
   display: block;
   width: 100%;
-  max-width: 350px;
+  max-width: 250px;
   margin: 2rem auto;
   padding: 1rem;
-  background-color: #333;;
-  /* Verde */
+  background-color: #333;
+  text-align-last: justify;
   color: white;
   border: none;
   border-radius: 5px;
@@ -127,4 +127,11 @@
   background-color: #6c757d;
   /* Gris cuando está deshabilitado */
   cursor: not-allowed;
+}
+
+.confirmar-pedido-span {
+  background-color: white;
+  border-radius: 2rem;
+  padding: 7px;
+  color: black;
 }

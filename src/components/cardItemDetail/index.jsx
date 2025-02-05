@@ -7,8 +7,6 @@ const CardItemDetail = ({ item, image }) => {
 
   const {carrito, AgregarAlCarrito }= useContext(CartContext)
 
-  console.log(carrito)//BORRAR
-
   const [cantidad, setCantidad] = useState(1);
 
   const aumentar = () => {
@@ -39,8 +37,8 @@ const CardItemDetail = ({ item, image }) => {
         <div className="card-content-detail">
           <h1 className="card-title-detail">{item?.titulo || "Sin título"}</h1>
           <h3 className="card-subtitle-detail">{item?.detalle2 || "Sin detalles"}</h3>
-          <p className="card-type-detail"><strong>Neto:</strong>{item?.tipo || "Tipo no disponible"}</p>
-          <p className="card-price-detail"><strong>Precio:</strong> ${item?.precio ?? "0.00"}</p>
+          <p className="card-type-detail"><strong>Neto:</strong> {item?.tipo || "Tipo no disponible"}</p>
+          <p className="card-price-detail"><strong>Precio:</strong>  ${item?.precio ?? "0.00"}</p>
           <p className="card-stock-detail"><strong>Stock:</strong> {item?.stock ?? "No disponible"}</p>
 
             <div className="card-quantity-detail">

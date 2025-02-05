@@ -1,9 +1,15 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../context/cartContext";
 import './Carrito.css';
 
 const Carrito = () => {
   const { carrito, valorTotalEnCarrito, aumentarCantidad, disminuirCantidad, vaciarCarrito } = useContext(CartContext);
+  const navigate = useNavigate();
+
+    const handleClick = () => {
+    navigate(`/confirmar`);
+  };
 
   return (
     <div className="carrito-page">
@@ -42,12 +48,14 @@ const Carrito = () => {
         ))}
       </div>
        {/* Botón "Realizar pedido" */}
+      {valorTotalEnCarrito()>0 &&
       <button
         className="confirmar-pedido-button"
-        disabled={carrito.length === 0}
+        onClick={handleClick}
       >
-        Realizar pedido ${valorTotalEnCarrito()}
+        pedido <span className="confirmar-pedido-span">${valorTotalEnCarrito()}</span>
       </button>
+      }
     </div>
   );
 };
