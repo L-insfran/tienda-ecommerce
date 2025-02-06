@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import imagePedido from '../../assets/icon/conf-pedido.jpg';
+import imagePedido from '../../assets/image/conf-pedido.jpg';
 import { CartContext } from "../../context/cartContext";
 import { pedirdDestino } from "../../helper/pedirDatos";
 import "./Pedido.css";
