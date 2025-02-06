@@ -1,6 +1,6 @@
-import kl from "../assets/image/miel-320x180.jpg";
-import mk250 from "../assets/image/mk250.png";
-import mk500 from "../assets/image/mk500.png";
+import kl from "@assets/image/miel-320x180.jpg";
+import mk250 from "@assets/image/mk250.png";
+import mk500 from "@assets/image/mk500.png";
 
 
 
