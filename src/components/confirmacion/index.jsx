@@ -5,7 +5,7 @@ import { pedirdDestino } from "../../helper/pedirDatos";
 import "./Pedido.css";
 
 const Pedido = () => {
-  const { valorTotalEnCarrito } = useContext(CartContext);
+  const { valorTotalEnCarrito, carrito } = useContext(CartContext);
 
   const [destino, setDestino] = useState([]); // Estado para las zonas de envío
   const [formaEntrega, setFormaEntrega] = useState("retiro"); // Estado para la forma de entrega
@@ -98,29 +98,118 @@ const Pedido = () => {
   };
 
   // Función para manejar el envío del pedido
+  // const handleEnviarPedido = () => {
+
+  //   if (!validarDatosUsuario()) {
+  //     alert("Por favor, complete los campos requeridos correctamente.");
+  //     return;
+  //   }
+
+  //   if (!medioPago) {
+  //     alert("Por favor, seleccione un medio de pago.");
+  //     return;
+  //   }
+
+    
+  //   const data = {
+  //     entrega: formaEntrega,
+  //     zona: formaEntrega === "envio" ? destino.find((zona) => zona.id == idZona) : null,
+  //     costoEnvio: formaEntrega === "envio" ? costoEnvio : 0,
+  //     totalAPagar: valorTotalEnCarrito() + costoEnvio,
+  //     medioPago: medioPago,
+  //     datosUsuario: datosUsuario,
+  //     producto:{
+  //       titulo:carrito[0].titulo,
+  //       Neto:carrito[0].tipo,
+  //       cantidad:carrito[0].cantidad,
+  //     }
+  //   };
+  //   const formattedData = `
+  //     🏪*Tienda On-Line - Kintsugi*🏪
+
+  //     📦 *Detalles del Pedido* 📦
+
+  //     *Forma de Entrega:* ${data.entrega}
+  //     ${data.entrega === "envio" ? `*Zona de Envío:* ${data.zona.zona}\n
+  //     *Costo de Envío:* $${data.costoEnvio}` : ""}
+  //     *Total a Pagar:* $${data.totalAPagar}
+  //     *Medio de Pago:* ${data.medioPago}
+
+  //     👤 *Datos del Usuario* 👤
+  //     *Nombre:* ${data.datosUsuario.nombre}
+  //     *Teléfono:* ${data.datosUsuario.telefono}
+  //     *Dirección:* ${data.datosUsuario.direccion}
+
+  //     🛒 *Producto* 🛒
+  //     ${data.producto.map((prod)=>{
+  //       `
+  //     *Título:* ${prod.producto.titulo}
+  //     *Neto:* ${prod.producto.Neto}
+  //     *Cantidad:* ${prod.producto.cantidad}
+  //       `
+  //     }) }
+     
+  //     `;
+
+  //   console.log(formattedData)
+  //   // const whatsappMessage = encodeURIComponent(formattedData)
+  //   // const whatsappLink = `https://wa.me/541133081248?text=${whatsappMessage}`;
+  //   // window.open(whatsappLink, "_blank")
+    
+  // };
   const handleEnviarPedido = () => {
-    if (!validarDatosUsuario()) {
-      alert("Por favor, complete los campos requeridos correctamente.");
-      return;
-    }
+  if (!validarDatosUsuario()) {
+    alert("Por favor, complete los campos requeridos correctamente.");
+    return;
+  }
 
-    if (!medioPago) {
-      alert("Por favor, seleccione un medio de pago.");
-      return;
-    }
+  if (!medioPago) {
+    alert("Por favor, seleccione un medio de pago.");
+    return;
+  }
 
-    const data = {
-      entrega: formaEntrega,
-      zona: formaEntrega === "envio" ? destino.find((zona) => zona.id == idZona) : null,
-      costoEnvio: formaEntrega === "envio" ? costoEnvio : 0,
-      totalAPagar: valorTotalEnCarrito() + costoEnvio,
-      medioPago: medioPago,
-      datosUsuario: datosUsuario,
-    };
-
-    console.log("Datos del pedido:", data);
+  const data = {
+    entrega: formaEntrega,
+    zona: formaEntrega === "envio" ? destino.find((zona) => zona.id == idZona) : null,
+    costoEnvio: formaEntrega === "envio" ? costoEnvio : 0,
+    totalAPagar: valorTotalEnCarrito() + costoEnvio,
+    medioPago: medioPago,
+    datosUsuario: datosUsuario,
+    productos: carrito.map((prod) => ({
+      titulo: prod.titulo,
+      Neto: prod.tipo,
+      cantidad: prod.cantidad,
+    })),
   };
 
+  const formattedData = `
+    🏪 *Tienda On-Line - Kintsugi* 🏪
+
+    📦 *Detalles del Pedido* 📦
+
+    *Forma de Entrega:* ${data.entrega}
+    ${data.entrega === "envio" ? `*Zona de Envío:* ${data.zona.zona}\n*Costo de Envío:* $${data.costoEnvio}` : ""}
+    *Total a Pagar:* $${data.totalAPagar}
+    *Medio de Pago:* ${data.medioPago}
+
+    👤 *Datos del Usuario* 👤
+    *Nombre:* ${data.datosUsuario.nombre}
+    *Teléfono:* ${data.datosUsuario.telefono}
+    *Dirección:* ${data.datosUsuario.direccion}
+
+    🛒 *Productos* 🛒
+    ${data.productos.map((prod) => `
+      *Título:* ${prod.titulo}
+      *Neto:* ${prod.Neto}
+      *Cantidad:* ${prod.cantidad}
+    `).join("\n")}
+  `;
+  const whatsappMessage = encodeURIComponent(formattedData)
+    const whatsappLink = `https://wa.me/541133081248?text=${whatsappMessage}`;
+    window.open(whatsappLink, "_blank")
+
+  console.log(formattedData);
+};
   return (
     <div className="pedido-container">
       <div className="pedido-content">

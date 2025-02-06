@@ -1,13 +1,15 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importamos useNavigate para manejar la navegación
 import icoCarrito from '../../assets/icon/anadir-carrito.png';
 import { CartContext } from "../../context/cartContext";
-import { useNavigate } from "react-router-dom"; // Importamos useNavigate para manejar la navegación
 import "./CardItemDetail.css";
 
 const CardItemDetail = ({ item, image }) => {
   const { carrito, AgregarAlCarrito } = useContext(CartContext);
   const [cantidad, setCantidad] = useState(1);
   const navigate = useNavigate(); // Hook para navegar
+
+
 
   const aumentar = () => {
     cantidad < item.stock && setCantidad(cantidad + 1);

@@ -160,11 +160,13 @@
 .error-message {
   color:red
 }
+/* Estilos para el botón flotante */
 
 
 @media (max-width: 500px) {
   .pedido-content {
     padding: 15px;
+    margin-top: 15px;
   }
 
   .pedido-title {
@@ -183,4 +185,5 @@
   .pedido-btn {
     font-size: 14px;
   }
+  
 }

@@ -20,7 +20,7 @@ const Carrito = () => {
           <span>Total</span>
         </div>
         <div className="header-right">$ {valorTotalEnCarrito()}</div>
-      </div>
+      </div>     
 
       {/* Botón para vaciar el carrito */}
       <div className="carrito-actions">
@@ -59,7 +59,7 @@ const Carrito = () => {
           className="confirmar-pedido-button"
           onClick={handleClick}
         >
-          pedido <span className="confirmar-pedido-span">${valorTotalEnCarrito()}</span>
+          Confirmar pedido <span className="confirmar-pedido-span">${valorTotalEnCarrito()}</span>
         </button>
       }
     </div>
