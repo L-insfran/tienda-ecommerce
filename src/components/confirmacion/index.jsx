@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import imagePedido from '../../assets/image/conf-pedido.jpg';
 import { CartContext } from "../../context/cartContext";
 import { pedirdDestino } from "../../helper/pedirDatos";
+import { collection, addDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { db } from "../../firebase/congif";
 import "./Pedido.css";
 
 const Pedido = () => {
-  const { valorTotalEnCarrito, carrito } = useContext(CartContext);
-
+  const { valorTotalEnCarrito, carrito, vaciarCarrito } = useContext(CartContext);
+  const navigate = useNavigate();
   const [destino, setDestino] = useState([]); // Estado para las zonas de envío
   const [formaEntrega, setFormaEntrega] = useState("retiro"); // Estado para la forma de entrega
   const [idZona, setIdZona] = useState(""); // Estado para la zona seleccionada
@@ -20,7 +23,7 @@ const Pedido = () => {
     comentario: "",
   });
   const [errores, setErrores] = useState({}); // Estado para manejar errores de validación
-
+  const [nroCompra, setNroCompra]= useState(null)
   // Cargar las zonas de envío al montar el componente
   useEffect(() => {
     pedirdDestino()
@@ -97,121 +100,92 @@ const Pedido = () => {
     return Object.keys(nuevosErrores).length === 0; // Retorna true si no hay errores
   };
 
-  // Función para manejar el envío del pedido
-  // const handleEnviarPedido = () => {
+  //Función para manejar el envío del pedido
 
-  //   if (!validarDatosUsuario()) {
-  //     alert("Por favor, complete los campos requeridos correctamente.");
-  //     return;
-  //   }
+  const handleEnviarPedido = async () => {
+    const pedidosRef = collection(db, "pedidos");
 
-  //   if (!medioPago) {
-  //     alert("Por favor, seleccione un medio de pago.");
-  //     return;
-  //   }
+    if (!validarDatosUsuario()) {
+      alert("Por favor, complete los campos requeridos correctamente.");
+      return;
+    }
 
-    
-  //   const data = {
-  //     entrega: formaEntrega,
-  //     zona: formaEntrega === "envio" ? destino.find((zona) => zona.id == idZona) : null,
-  //     costoEnvio: formaEntrega === "envio" ? costoEnvio : 0,
-  //     totalAPagar: valorTotalEnCarrito() + costoEnvio,
-  //     medioPago: medioPago,
-  //     datosUsuario: datosUsuario,
-  //     producto:{
-  //       titulo:carrito[0].titulo,
-  //       Neto:carrito[0].tipo,
-  //       cantidad:carrito[0].cantidad,
-  //     }
-  //   };
-  //   const formattedData = `
-  //     🏪*Tienda On-Line - Kintsugi*🏪
+    if (!medioPago) {
+      alert("Por favor, seleccione un medio de pago.");
+      return;
+    }
 
-  //     📦 *Detalles del Pedido* 📦
+    const data = {
+      entrega: formaEntrega,
+      zona: formaEntrega === "envio" ? destino.find((zona) => zona.id == idZona) : null,
+      costoEnvio: formaEntrega === "envio" ? costoEnvio : 0,
+      totalAPagar: valorTotalEnCarrito() + costoEnvio,
+      medioPago: medioPago,
+      datosUsuario: datosUsuario,
+      productos: carrito.map((prod) => ({
+        titulo: prod.titulo,
+        Neto: prod.tipo,
+        cantidad: prod.cantidad,
+        precio: prod.precio,
+      })),
+    };
 
-  //     *Forma de Entrega:* ${data.entrega}
-  //     ${data.entrega === "envio" ? `*Zona de Envío:* ${data.zona.zona}\n
-  //     *Costo de Envío:* $${data.costoEnvio}` : ""}
-  //     *Total a Pagar:* $${data.totalAPagar}
-  //     *Medio de Pago:* ${data.medioPago}
+    try {
+      const docRef = await addDoc(pedidosRef, data); // Guarda el pedido en Firestore
+      setNroCompra(docRef.id);
 
-  //     👤 *Datos del Usuario* 👤
-  //     *Nombre:* ${data.datosUsuario.nombre}
-  //     *Teléfono:* ${data.datosUsuario.telefono}
-  //     *Dirección:* ${data.datosUsuario.direccion}
+      const formattedData = `
+      🏪 *Tienda On-Line - Kintsugi* 🏪
 
-  //     🛒 *Producto* 🛒
-  //     ${data.producto.map((prod)=>{
-  //       `
-  //     *Título:* ${prod.producto.titulo}
-  //     *Neto:* ${prod.producto.Neto}
-  //     *Cantidad:* ${prod.producto.cantidad}
-  //       `
-  //     }) }
-     
-  //     `;
+      📦 *Detalles del Pedido* 📦
 
-  //   console.log(formattedData)
-  //   // const whatsappMessage = encodeURIComponent(formattedData)
-  //   // const whatsappLink = `https://wa.me/541133081248?text=${whatsappMessage}`;
-  //   // window.open(whatsappLink, "_blank")
-    
-  // };
-  const handleEnviarPedido = () => {
-  if (!validarDatosUsuario()) {
-    alert("Por favor, complete los campos requeridos correctamente.");
-    return;
-  }
+      *Forma de Entrega:* ${data.entrega}
+      ${data.entrega === "envio" ? `*Zona de Envío:* ${data.zona.zona}\n    *Costo de Envío:* $${data.costoEnvio}` : ""}
+      *Total a Pagar:* $${data.totalAPagar}
+      *Medio de Pago:* ${data.medioPago}
 
-  if (!medioPago) {
-    alert("Por favor, seleccione un medio de pago.");
-    return;
-  }
+      👤 *Datos del Usuario* 👤
+      *Nombre:* ${data.datosUsuario.nombre}
+      *Teléfono:* ${data.datosUsuario.telefono}
+      *Dirección:* ${data.datosUsuario.direccion || "No proporcionó información"}
 
-  const data = {
-    entrega: formaEntrega,
-    zona: formaEntrega === "envio" ? destino.find((zona) => zona.id == idZona) : null,
-    costoEnvio: formaEntrega === "envio" ? costoEnvio : 0,
-    totalAPagar: valorTotalEnCarrito() + costoEnvio,
-    medioPago: medioPago,
-    datosUsuario: datosUsuario,
-    productos: carrito.map((prod) => ({
-      titulo: prod.titulo,
-      Neto: prod.tipo,
-      cantidad: prod.cantidad,
-      precio:prod.precio
-    })),
+      🛒 *Productos* 🛒
+      *#Id-compra:* ${docRef.id}
+      ${data.productos
+        .map(
+          (prod) => `
+        *Título:* ${prod.titulo}
+        *Neto:* ${prod.Neto}
+        *Precio:* $${prod.precio}
+        *Cantidad:* ${prod.cantidad}
+      `
+        )
+        .join("\n")}
+      `;
+
+      //Enviar mensaje por WhatsApp
+      const whatsappMessage = encodeURIComponent(formattedData);
+      const whatsappLink = `https://wa.me/541133081248?text=${whatsappMessage}`;
+      window.open(whatsappLink, "_blank");
+
+      vaciarCarrito();
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+
+      if(docRef.id){
+        return(
+          <div>
+            <h1>Muchas Gracias por tu compra</h1><br />
+            <h3>Tu Numero de pedido es: {docRef.id}</h3><br />
+            <p>A la brevedad se  estarán contactando por el pedido!</p>
+          </div>
+        )
+      }
+    } catch (error) {
+      console.error("No se pudo realizar el pedido", error);
+    }
   };
-
-  const formattedData = `
-    🏪 *Tienda On-Line - Kintsugi* 🏪
-
-    📦 *Detalles del Pedido* 📦
-
-    *Forma de Entrega:* ${data.entrega}
-    ${data.entrega === "envio" ? `*Zona de Envío:* ${data.zona.zona}\n    *Costo de Envío:* $${data.costoEnvio}` : ""}
-    *Total a Pagar:* $${data.totalAPagar}
-    *Medio de Pago:* ${data.medioPago}
-
-    👤 *Datos del Usuario* 👤
-    *Nombre:* ${data.datosUsuario.nombre}
-    *Teléfono:* ${data.datosUsuario.telefono}
-    *Dirección:* ${data.datosUsuario.direccion}
-
-    🛒 *Productos* 🛒
-    ${data.productos.map((prod) => `
-      *Título:* ${prod.titulo}
-      *Neto:* ${prod.Neto}
-      *Precio:* $${prod.precio}
-      *Cantidad:* ${prod.cantidad}
-    `).join("\n")}
-  `;
-  // const whatsappMessage = encodeURIComponent(formattedData)
-  //   const whatsappLink = `https://wa.me/541133081248?text=${whatsappMessage}`;
-  //   window.open(whatsappLink, "_blank")
-
-  console.log(formattedData);
-};
   return (
     <div className="pedido-container">
       <div className="pedido-content">
