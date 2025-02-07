@@ -5,6 +5,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.jpg', '**/*.JPG', '**/*.png', '**/*.PNG'],
+  base:'./',
   resolve: {
     alias: {
       '@assets': '/src/assets',

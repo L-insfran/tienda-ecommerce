@@ -179,6 +179,7 @@ const Pedido = () => {
       titulo: prod.titulo,
       Neto: prod.tipo,
       cantidad: prod.cantidad,
+      precio:prod.precio
     })),
   };
 
@@ -188,7 +189,7 @@ const Pedido = () => {
     📦 *Detalles del Pedido* 📦
 
     *Forma de Entrega:* ${data.entrega}
-    ${data.entrega === "envio" ? `*Zona de Envío:* ${data.zona.zona}\n*Costo de Envío:* $${data.costoEnvio}` : ""}
+    ${data.entrega === "envio" ? `*Zona de Envío:* ${data.zona.zona}\n    *Costo de Envío:* $${data.costoEnvio}` : ""}
     *Total a Pagar:* $${data.totalAPagar}
     *Medio de Pago:* ${data.medioPago}
 
@@ -201,12 +202,13 @@ const Pedido = () => {
     ${data.productos.map((prod) => `
       *Título:* ${prod.titulo}
       *Neto:* ${prod.Neto}
+      *Precio:* $${prod.precio}
       *Cantidad:* ${prod.cantidad}
     `).join("\n")}
   `;
-  const whatsappMessage = encodeURIComponent(formattedData)
-    const whatsappLink = `https://wa.me/541133081248?text=${whatsappMessage}`;
-    window.open(whatsappLink, "_blank")
+  // const whatsappMessage = encodeURIComponent(formattedData)
+  //   const whatsappLink = `https://wa.me/541133081248?text=${whatsappMessage}`;
+  //   window.open(whatsappLink, "_blank")
 
   console.log(formattedData);
 };

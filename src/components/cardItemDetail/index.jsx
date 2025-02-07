@@ -5,6 +5,7 @@ import { CartContext } from "../../context/cartContext";
 import "./CardItemDetail.css";
 
 const CardItemDetail = ({ item, image }) => {
+  
   const { carrito, AgregarAlCarrito } = useContext(CartContext);
   const [cantidad, setCantidad] = useState(1);
   const navigate = useNavigate(); // Hook para navegar
