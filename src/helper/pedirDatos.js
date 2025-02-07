@@ -1,5 +1,4 @@
-// import destino from "../data/destinos.json"
-// import prod from "../data/productos.json";
+
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase/congif";
 
@@ -9,6 +8,12 @@ export const pedirProductos = () => {
 
   return getDocs(productosRef)
     .then((resp) => {
+
+      if (resp.empty) {
+        console.warn("⚠ No hay productos en la colección");
+        return [];
+      }
+
       return resp.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id
